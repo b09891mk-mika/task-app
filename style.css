@@ -54,3 +54,28 @@ li.completed {
   max-width: 480px;
   margin: auto;
 }
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-area input {
+  flex: 1;
+}
+
+.input-area button {
+  width: 80px;
+  font-weight: bold;
+}
+
+li {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+button#clearCompleted {
+  background: #bbb;
+  font-size: 14px;
+}
