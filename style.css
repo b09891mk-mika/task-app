@@ -102,6 +102,10 @@ button#clearCompleted {
   height: 44px;
 }
 
+body {
+  padding-bottom: 80px;
+}
+
 /* 全体の基準文字サイズ */
 body {
   font-size: 16px;
@@ -120,9 +124,5 @@ body {
 /* タスクリスト */
 li {
   font-size: 16px;
-}
-
-body {
-  padding-bottom: 80px;
 }
 
