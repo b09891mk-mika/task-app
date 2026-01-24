@@ -92,7 +92,6 @@ button#clearCompleted {
   box-sizing: border-box;
 }
 
-
 .input-area input {
   flex: 1;
   height: 44px;
@@ -102,4 +101,3 @@ button#clearCompleted {
 .input-area button {
   height: 44px;
 }
-
