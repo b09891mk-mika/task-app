@@ -102,6 +102,27 @@ button#clearCompleted {
   height: 44px;
 }
 
+/* 全体の基準文字サイズ */
+body {
+  font-size: 16px;
+}
+
+/* 入力欄 */
+.input-area input {
+  font-size: 16px;
+}
+
+/* 追加ボタン */
+.input-area button {
+  font-size: 16px;
+}
+
+/* タスクリスト */
+li {
+  font-size: 16px;
+}
+
 body {
   padding-bottom: 80px;
 }
+
