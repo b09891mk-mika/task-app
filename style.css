@@ -101,3 +101,7 @@ button#clearCompleted {
 .input-area button {
   height: 44px;
 }
+
+body {
+  padding-bottom: 80px;
+}
