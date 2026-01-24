@@ -130,3 +130,8 @@ li {
 body {
   font-size: 18px;
 }
+
+.input-area input,
+.input-area button {
+  height: 48px;
+}
