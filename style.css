@@ -79,3 +79,22 @@ button#clearCompleted {
   background: #bbb;
   font-size: 14px;
 }
+
+.input-area {
+  position: sticky;
+  bottom: 0;
+  background: #f0f0f0;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.input-area input {
+  flex: 1;
+  height: 44px;
+  font-size: 16px;
+}
+
+.input-area button {
+  height: 44px;
+}
