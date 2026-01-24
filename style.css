@@ -113,7 +113,7 @@ body {
 
 /* 入力欄 */
 .input-area input {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 /* 追加ボタン */
@@ -126,12 +126,10 @@ li {
   font-size: 16px;
 }
 
-body {
-  font-size: 18px;
-}
 
 .input-area input,
 .input-area button {
   height: 48px;
 }
+
 
