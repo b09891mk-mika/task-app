@@ -1,4 +1,3 @@
-
 body {
   font-family: system-ui, sans-serif;
   background: #f5f5f5;
@@ -57,29 +56,24 @@ li.completed {
 }
 
 .input-area {
-  display: flex;
   gap: 10px;
   margin-bottom: 10px;
 }
 
-.input-area input {
-  flex: 1;
-}
 
 .input-area button {
   width: 80px;
   font-weight: bold;
 }
 
-li {
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-}
+
+
 button#clearCompleted {
   background: #bbb;
   font-size: 14px;
 }
+
+
 
 .input-area {
   position: fixed;
@@ -88,10 +82,12 @@ button#clearCompleted {
   width: 100%;
   background: #f0f0f0;
   padding: 10px;
-  display: flex;
   gap: 10px;
   box-sizing: border-box;
 }
+
+
+
 
 .input-area input {
   flex: 1;
@@ -146,19 +142,34 @@ li {
   box-sizing: border-box;
 }
 
-
 .subtask-list {
-  margin-left: 24px;
-  margin-top: 8px;
+  margin-left: 0;
   padding-left: 0;
 }
 
+.subtask-list li input[type="checkbox"] {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+
 
 .subtask-list li {
-  list-style: none;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 8px;
-  padding: 6px 0;
-  font-size: 16px;
 }
+
+
+.subtask-list {
+  display: block;
+}
+
+
+.subtask-list {
+  display: block !important;
+}
+
