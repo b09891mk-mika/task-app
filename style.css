@@ -197,4 +197,9 @@ li {
   font-size: 16px;
 }
 
+.subtask-list li span {
+  display: block;
+}
+
+
 
