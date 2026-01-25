@@ -78,3 +78,43 @@ clearButton.addEventListener("click", function () {
 
 // 初回表示
 renderTasks();
+
+
+
+const taskInput = document.getElementById("taskInput");
+const addButton = document.getElementById("addButton");
+const taskList = document.getElementById("taskList");
+
+
+const subtaskInput = document.querySelector(".subtask-input");
+const subtaskList = document.querySelector(".subtask-list");
+const progressText = document.querySelector("#progress");
+
+function updateProgress() {
+  const all = subtaskList.querySelectorAll("li").length;
+  const done = subtaskList.querySelectorAll("input:checked").length;
+
+  const percent = all === 0 ? 0 : Math.round((done / all) * 100);
+  progressText.textContent = `進捗：${percent}%`;
+}
+
+subtaskInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && subtaskInput.value !== "") {
+
+    const li = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.addEventListener("change", updateProgress);
+
+    const span = document.createElement("span");
+    span.textContent = subtaskInput.value;
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    subtaskList.appendChild(li);
+
+    subtaskInput.value = "";
+    updateProgress();
+  }
+});
