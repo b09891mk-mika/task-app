@@ -1,3 +1,4 @@
+
 body {
   font-family: system-ui, sans-serif;
   background: #f5f5f5;
@@ -132,74 +133,32 @@ li {
   height: 48px;
 }
 
+
+
 .subtask-area {
-  display: flex;
-  gap: 8px;
-  width: 100%;
   margin-top: 8px;
 }
 
 .subtask-input {
-  flex: 1;
+  width: 100%;
+  height: 40px;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
-.subtask-list li {
-  font-size: 16px;
-  padding: 8px;
-}
-
-.add-subtask {
-  width: 40px;
-  flex-shrink: 0;
-}
-
-.subtask-list {
-  margin-left: 24px;   /* ← ここが「少し右」 */
-  margin-top: 8px;
-  padding-left: 0;
-}
-
-.subtask-list li {
-  list-style: none;
-  padding: 6px 0;
-  font-size: 16px;
-}
-
-.subtask-area {
-  margin-top: 8px;
-}
 
 .subtask-list {
   margin-left: 24px;
-  margin-bottom: 8px;
+  margin-top: 8px;
   padding-left: 0;
 }
 
+
 .subtask-list li {
   list-style: none;
-  padding: 6px 0;
-  font-size: 16px;
-}
-
-.subtask-input {
-  width: 100%;
-  font-size: 16px;
-}
-
-.subtask-list li {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.subtask-list li span {
+  padding: 6px 0;
   font-size: 16px;
 }
-
-.subtask-list li span {
-  display: block;
-}
-
-
-
