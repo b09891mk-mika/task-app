@@ -1,17 +1,42 @@
+/********************************
+ * ① DOM取得（HTMLとつなぐ）
+ ********************************/
+
+
 const button = document.getElementById("addButton");
 const input = document.getElementById("taskInput");
 const list = document.getElementById("taskList");
 const clearButton = document.getElementById("clearCompleted");
 
-// 保存されているタスクを読み込む
+
+
+/********************************
+ * ② データ（タスクの中身）
+ ********************************/
+
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-// 保存
+let subtasks = JSON.parse(localStorage.getItem("subtasks")) || [];
+
+
+/********************************
+ * ③ 保存・読み込み
+ ********************************/
+
 function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// 画面に表示
+function saveSubtasks() {
+  localStorage.setItem("subtasks", JSON.stringify(subtasks));
+}
+
+
+
+/********************************
+ * ④ タスク表示（画面に描く）
+ ********************************/
+
 function renderTasks() {
   list.innerHTML = "";
 
@@ -38,7 +63,12 @@ sortedTasks.forEach(function (task, index) {
   });
 }
 
-// タスク追加
+
+
+/********************************
+ * ⑤ タスク追加
+ ********************************/
+
 function addTask() {
   const taskText = input.value.trim();
 
@@ -56,6 +86,12 @@ function addTask() {
   input.value = "";
 }
 
+
+
+/********************************
+ * ⑥ イベント（クリック・Enter）
+ ********************************/
+
 // 追加ボタン
 button.addEventListener("click", addTask);
 
@@ -66,7 +102,12 @@ input.addEventListener("keydown", function (event) {
   }
 });
 
-// 完了タスク削除
+
+
+/********************************
+ * ⑦ 完了タスク削除
+ ********************************/
+
 clearButton.addEventListener("click", function () {
   tasks = tasks.filter(function (task) {
     return task.completed === false;
@@ -76,7 +117,12 @@ clearButton.addEventListener("click", function () {
   renderTasks();
 });
 
-// 初回表示
+
+
+/********************************
+ * ⑧ 初期表示
+ ********************************/
+
 renderTasks();
 
 
@@ -85,6 +131,10 @@ const taskInput = document.getElementById("taskInput");
 const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
 
+
+/********************************
+ * ⑨ サブタスク（実験中）
+ ********************************/
 
 const subtaskInput = document.querySelector(".subtask-input");
 const subtaskList = document.querySelector(".subtask-list");
@@ -103,6 +153,14 @@ subtaskInput.addEventListener("keydown", (e) => {
 
     const li = document.createElement("li");
 
+subtasks.push({
+  text: subtaskInput.value,
+  done: false
+});
+
+saveSubtasks();
+
+
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.addEventListener("change", updateProgress);
@@ -118,3 +176,29 @@ subtaskInput.addEventListener("keydown", (e) => {
     updateProgress();
   }
 });
+
+
+
+subtasks.forEach(subtask => {
+  const li = document.createElement("li");
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = subtask.done;
+
+  checkbox.addEventListener("change", () => {
+    subtask.done = checkbox.checked;
+    saveSubtasks();
+    updateProgress();
+  });
+
+  const span = document.createElement("span");
+  span.textContent = subtask.text;
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+  subtaskList.appendChild(li);
+});
+
+updateProgress();
+
