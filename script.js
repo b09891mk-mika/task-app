@@ -53,9 +53,3 @@ function renderSubtasks(task, li) {
 }
 
 
-
-
-
-updateProgress();
-
-
