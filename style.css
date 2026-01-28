@@ -37,6 +37,8 @@ ul {
   padding: 0;
 }
 
+
+
 li {
   background: white;
   padding: 12px;
@@ -49,6 +51,12 @@ li.completed {
   color: #999;
   text-decoration: line-through;
 }
+
+li {
+  position: relative;
+  z-index: 2;
+}
+
 
 .container {
   max-width: 480px;
@@ -84,6 +92,7 @@ button#clearCompleted {
   padding: 10px;
   gap: 10px;
   box-sizing: border-box;
+ z-index: 1;
 }
 
 
@@ -153,6 +162,7 @@ li {
   height: 18px;
   flex-shrink: 0;
 }
+
 
 
 
