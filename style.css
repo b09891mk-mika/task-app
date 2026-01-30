@@ -183,3 +183,29 @@ li {
   display: block !important;
 }
 
+
+input[type="checkbox"] {
+  width: auto;
+  padding: 0;
+}
+
+@keyframes shine {
+  0% {
+    box-shadow: 0 0 0 rgba(76, 175, 80, 0);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(76, 175, 80, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+.shine {
+  animation: shine 0.8s ease-out;
+}
+
+  display: block !important;
+}
+
+
