@@ -1,15 +1,46 @@
 const taskList = document.getElementById("taskList");
 
-const task = {
-  text: "テストタスク",
-  subtasks: []
-};
+const tasks = []; // ←タスクの集合
+let selectedIndex = null;
+
+const addButton = document.getElementById("addButton");
+const taskInput = document.getElementById("taskInput");
+
+addButton.addEventListener("click", () => {
+
+  taskInput.style.display = "block";
+  taskInput.focus();
+});
+
+
+taskInput.addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  if (taskInput.value === "") return;
+
+
+  // タスク追加
+  tasks.push({
+    text: taskInput.value,
+    subtasks: []
+  });
+
+  // 追加したタスクを選択状態に
+  selectedIndex = tasks.length - 1;
+
+  // 入力欄リセット
+  taskInput.value = "";
+  taskInput.style.display = "none";
+
+  render();
+});
+
 
 let selected = false;
 
 function render() {
   taskList.innerHTML = "";
 
+ tasks.forEach((task, index) => {
   const li = document.createElement("li");
   li.textContent = task.text;
 
@@ -31,12 +62,13 @@ if (percent >= 100) { // ←きらっと
   progressInner.classList.remove("shine");
 }
 
-
+  progressInner.className = "progress-inner";
   progressInner.style.height = "100%";
   progressInner.style.width = percent.toFixed(1) + "%";
 
 if (percent >= 100) {
   progressInner.style.background = "#4CAF50"; // 緑（完了）
+  progressInner.classList.add("progress-inner"); // 光ON
 } else {
   progressInner.style.background = "#4a90e2"; // 青（途中）
 }
@@ -64,17 +96,22 @@ if (percent >= 100) {
 
   li.appendChild(progressBar);
 
+
+
+  // クリックで選択
   li.addEventListener("click", () => {
-    selected = true;
-    render();
+      selectedIndex = index;
+      render();
+    });
+
+    if (selectedIndex === index) {
+      li.style.border = "2px solid blue";
+      renderSubtasks(task, li);
+    }
+
+    taskList.appendChild(li);
   });
 
-  if (selected) {
-    li.style.border = "2px solid blue";
-    renderSubtasks(task, li);
-  }
-
-  taskList.appendChild(li);
 }
 
 render();
@@ -137,4 +174,8 @@ function calcProgress(task) {
   return (done / total) * 100;
 
 }
+  return (done / total) * 100;
+
+}
+
 
