@@ -9,6 +9,7 @@ h1 {
   text-align: center;
 }
 
+
 input {
   width: 100%;
   padding: 12px;
@@ -205,7 +206,45 @@ input[type="checkbox"] {
   animation: shine 0.8s ease-out;
 }
 
+/* 流れる光用 */
+.progress-inner {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 光そのもの */
+.progress-inner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  animation: shine-move 1.2s ease-out;
+}
+
+/* 左 → 右 */
+@keyframes shine-move {
+  from {
+    left: -30%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+#taskInput {
+  display: none;
+}
+
   display: block !important;
 }
+
 
 
