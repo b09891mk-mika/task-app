@@ -6,30 +6,46 @@ let selectedIndex = null;
 const addButton = document.getElementById("addButton");
 const taskInput = document.getElementById("taskInput");
 
-addButton.addEventListener("click", () => {
+taskInput.addEventListener("focus", () => {
+  document.body.classList.add("quiet");
+});
 
-  taskInput.style.display = "block";
+taskInput.addEventListener("blur", () => {
+  document.body.classList.remove("quiet");
+});
+
+addButton.addEventListener("click", () => {
+taskInput.style.display = "block";
+  taskInput.classList.add("active");
+
   taskInput.focus();
 });
 
 
 taskInput.addEventListener("keydown", e => {
   if (e.key !== "Enter") return;
-  if (taskInput.value === "") return;
+
+
+
+const text = taskInput.value.trim();
+  if (text === "") return;
+
 
 
   // タスク追加
-  tasks.push({
-    text: taskInput.value,
-    subtasks: []
-  });
+  tasks.push({ text, subtasks: [] });
 
   // 追加したタスクを選択状態に
   selectedIndex = tasks.length - 1;
 
-  // 入力欄リセット
-  taskInput.value = "";
+  taskInput.value = "";   
+  taskInput.addEventListener("blur", () => {
+  taskInput.classList.remove("active");
   taskInput.style.display = "none";
+  });
+
+
+  taskInput.classList.remove("active");
 
   render();
 });
@@ -174,8 +190,3 @@ function calcProgress(task) {
   return (done / total) * 100;
 
 }
-  return (done / total) * 100;
-
-}
-
-
