@@ -1,6 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
+<style>
+  .task-input {
+    border: none;          /* 枠を消す */
+    outline: none;         /* フォーカス枠を消す */
+    border-bottom: 2px solid transparent;
+    font-size: 16px;
+    padding: 6px 2px;
+    width: 200px;
+    transition: border-color 0.3s ease;
+  }
+
+  .task-input:focus {
+    border-bottom-color: #4a90e2; /* 青い下線 */
+  }
+</style>
+
   <meta charset="UTF-8">
   <title>ミニ版テスト</title>
 </head>
@@ -8,8 +26,10 @@
 
   <ul id="taskList"></ul>
 
+<button id="addButton">＋</button>
+<input id="taskInput" class="task-input" />
+
   <script src="script.js"></script>
 </body>
 </html>
-
 
