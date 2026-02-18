@@ -1,10 +1,59 @@
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+console.log("JS loaded", document.body.innerHTML);
+console.log("JS loaded");
+
+
+// ① DOM取得
 const taskList = document.getElementById("taskList");
-
-const tasks = []; // ←タスクの集合
-let selectedIndex = null;
-
 const addButton = document.getElementById("addButton");
 const taskInput = document.getElementById("taskInput");
+const phaseContainer = document.getElementById("phaseContainer");
+
+console.log("taskList:", taskList);
+console.log("phaseContainer:", document.getElementById("phaseContainer"));
+
+
+// ② 状態
+const tasks = []; 
+let selectedIndex = null;
+
+const phases = [
+  { title: "フェーズ1", tasks: [] },
+  { title: "フェーズ2", tasks: [] },
+  { title: "フェーズ3", tasks: [] }
+];
+
+let activePhaseIndex = 0;
+
+//③イベント
+addButton.addEventListener("click", () => {
+  taskInput.classList.add("active");
+  taskInput.focus();
+});
+
+taskInput.addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+
+const text = taskInput.value.trim();
+  if (text === "") return;
+
+
+  tasks.push({ text, subtasks: [] });
+
+  selectedIndex = tasks.length - 1;
+
+  taskInput.value = "";
+  taskInput.classList.remove("active");
+
+
+
+
+  render();
+});
+
 
 taskInput.addEventListener("focus", () => {
   document.body.classList.add("quiet");
@@ -14,44 +63,9 @@ taskInput.addEventListener("blur", () => {
   document.body.classList.remove("quiet");
 });
 
-addButton.addEventListener("click", () => {
-taskInput.style.display = "block";
-  taskInput.classList.add("active");
 
-  taskInput.focus();
-});
-
-
-taskInput.addEventListener("keydown", e => {
-  if (e.key !== "Enter") return;
-
-
-
-const text = taskInput.value.trim();
-  if (text === "") return;
-
-
-
-  // タスク追加
-  tasks.push({ text, subtasks: [] });
-
-  // 追加したタスクを選択状態に
-  selectedIndex = tasks.length - 1;
-
-  taskInput.value = "";   
-  taskInput.addEventListener("blur", () => {
-  taskInput.classList.remove("active");
-  taskInput.style.display = "none";
-  });
-
-
-  taskInput.classList.remove("active");
-
-  render();
-});
-
-
-let selected = false;
+// ③ 関数
+console.log("renderPhases fired");
 
 function render() {
   taskList.innerHTML = "";
@@ -113,8 +127,6 @@ if (percent >= 100) {
   li.appendChild(progressBar);
 
 
-
-  // クリックで選択
   li.addEventListener("click", () => {
       selectedIndex = index;
       render();
@@ -147,12 +159,12 @@ function renderSubtasks(task, li) {
         weight: Math.random() < 0.5 ? 1 : 3
 });
 
-console.log(task.subtasks);
-console.log(calcProgress(task));
+    console.log(task.subtasks);
+    console.log(calcProgress(task));
 
-      render();
+    render();
     }
-  });
+});
 
   const ul = document.createElement("ul");
 
@@ -176,6 +188,9 @@ console.log(calcProgress(task));
 
   li.appendChild(input);
   li.appendChild(ul);
+
+input.focus();
+
 }
 
 function calcProgress(task) {
@@ -190,3 +205,44 @@ function calcProgress(task) {
   return (done / total) * 100;
 
 }
+
+
+function renderPhases() {
+  console.log("renderPhases fired");
+
+  phaseContainer.innerHTML = "";
+
+  phases.forEach((phase, index) => {
+    const box = document.createElement("div");
+    box.className = "phase-card";
+
+    if (index === activePhaseIndex) box.classList.add("active");
+    else if (index < activePhaseIndex) box.classList.add("left");
+    else box.classList.add("right");
+
+    box.textContent = phase.title;
+
+    phaseContainer.appendChild(box);
+  });
+}
+
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") {
+    if (activePhaseIndex < phases.length - 1) {
+      activePhaseIndex++;
+      renderPhases();
+    }
+  }
+
+  if (e.key === "ArrowLeft") {
+    if (activePhaseIndex > 0) {
+      activePhaseIndex--;
+      renderPhases();
+    }
+  }
+});
+
+console.log("最終行 到達");
+
+render();
+renderPhases();
